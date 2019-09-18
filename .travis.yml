@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -it -e CI=true giblets2570/react-app yarn test
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'Test-Docker'
+  env: 'TestDocker-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-903755483314'
+  bucket_path: 'Test-Docker'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
